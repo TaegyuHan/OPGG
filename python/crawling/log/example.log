@@ -1,0 +1,7 @@
+[38;21m2021-06-19 11:40:31,317 | OPGG | INFO | CLASS | OPGG > run - (opgg.py:20) [0m
+[38;21m2021-06-19 11:40:31,318 | OPGG | INFO | OPGG.read_html fun > run - (opgg.py:33) [0m
+[38;21m2021-06-19 11:43:01,410 | OPGG | INFO | CLASS | OPGG > run - (opgg.py:20) [0m
+[38;21m2021-06-19 11:43:01,411 | OPGG | INFO | FUC | OPGG.read_html > run - (opgg.py:33) [0m
+[31;21m2021-06-19 11:43:01,584 | OPGG | ERROR | FUC | OPGG.read_html >  - (opgg.py:43) [0m
+[38;21m2021-06-19 11:48:13,697 | OPGG | INFO | CLASS | OPGG > run - (opgg.py:22) [0m
+[38;21m2021-06-19 11:48:13,697 | OPGG | INFO | FUC | OPGG.read_html > run - (opgg.py:35) [0m
