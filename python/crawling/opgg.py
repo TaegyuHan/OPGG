@@ -93,6 +93,9 @@ class OPGG():
         try:
             ## html 읽기
             html = self.read_html(self.OPGG_URL)
+
+            # 크롤링 코드 확인
+            # self.html_code_save(html, "find_champion_statistics_info.txt") 
             
             data_version = html.find("div", class_="champion-index__version"
                                     ).get_text(
@@ -187,6 +190,68 @@ class OPGG():
 
 
 
+
+    def champion_statistics_ban_info(self):
+  
+        logger.info("FUC | OPGG.champion_statistics_ban_info > run")
+
+        # 결과 저장 리스트
+        result_list = []
+
+        try:
+            ## html 읽기
+            html = self.read_html(self.OPGG_TREND_CHAMP_BAN)
+
+            # 크롤링 코드 확인
+            # self.html_code_save(html, "champion_statistics_ban_info.txt")
+
+            for line in ("ALL", "TOP", "JUNGLE", "MID", "ADC", "SUPPORT"):
+
+                css_selecter = "tabItem champion-trend-banratio-{}".format(line)
+                ## 티어 챔피언 정보 tag 리스트
+                champion_info_list= html.find("tbody", attrs={"class":css_selecter}
+                                      ).find_all('tr')
+                for n in range(len(champion_info_list)):
+
+                    # rank 순서
+                    rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
+                                                                      "champion-index-table__cell--rank"
+                                                  ).get_text()
+
+                    # filter
+                    line_filter = champion_info_list[n].find("a"
+                                                        ).attrs["href"
+                                                        ].split("/")[-1
+                                                        ].upper()
+
+                    # champion_name 찾기
+                    champion_name = champion_info_list[n].find("div", class_="champion-index-table__name"
+                                                        ).get_text() 
+
+                    # 밴률
+                    ban_rate = champion_info_list[n].find("td", class_="champion-index-table__cell--value"
+                                                  ).get_text(
+                                                  ).replace("%", "")
+
+                    # print(
+                    #    rank_num, # 번호
+                    #    line_filter, # 라인 검색 필터
+                    #    champion_name, #  챔피언 이름
+                    #    ban_rate # 밴률
+                    # )
+
+                    # 결과 list에 저장
+                    result_list.append([
+                      rank_num,
+                      line_filter,
+                      champion_name,
+                      ban_rate
+                    ])
+
+            return result_list
+
+        except:
+            logger.error("FUC | OPGG.champion_statistics_ban_info  > ")
 
 
 if __name__ == '__main__':
