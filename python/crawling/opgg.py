@@ -73,96 +73,103 @@ class OPGG():
         # 결과 저장 리스트
         result_list = []
 
-        ## html 읽기
-        html = self.read_html(self.OPGG_URL)
-        
-        data_version = html.find("div", class_="champion-index__version"
-                                ).get_text(
-                                ).split(':'
-                                )[1].strip()
+        try:
+            ## html 읽기
+            html = self.read_html(self.OPGG_URL)
+            
+            data_version = html.find("div", class_="champion-index__version"
+                                    ).get_text(
+                                    ).split(':'
+                                    )[1].strip()
 
-        for line in  ("TOP", "JUNGLE", "MID", "ADC", "SUPPORT"):
+            for line in  ("TOP", "JUNGLE", "MID", "ADC", "SUPPORT"):
 
-            ## 티어 챔피언 정보 tag 리스트
-            champion_info_list= html.find("tbody", class_='tabItem champion-trend-tier-{}'.format(line)
-                                  ).find_all('tr')
+                ## 티어 챔피언 정보 tag 리스트
+                champion_info_list= html.find("tbody", class_='tabItem champion-trend-tier-{}'.format(line)
+                                      ).find_all('tr')
 
-            for n in range(len(champion_info_list)):
+                for n in range(len(champion_info_list)):
 
-                # rank 순서
-                rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
-                                                                   "champion-index-table__cell--rank"
-                                              ).get_text()
+                    # rank 순서
+                    rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
+                                                                      "champion-index-table__cell--rank"
+                                                  ).get_text()
 
-                # line 찾기
-                line_position = champion_info_list[n].find("a"
-                                                    ).attrs["href"
-                                                    ].split("/")[-1
-                                                    ].upper()
+                    # line 찾기
+                    line_position = champion_info_list[n].find("a"
+                                                        ).attrs["href"
+                                                        ].split("/")[-1
+                                                        ].upper()
 
-                # champion_name 찾기
-                champion_name = champion_info_list[n].find("div", class_="champion-index-table__name"
-                                                    ).get_text() 
+                    # champion_name 찾기
+                    champion_name = champion_info_list[n].find("div", class_="champion-index-table__name"
+                                                        ).get_text() 
 
-                # 전 티어 순위 변동 상태
-                change_tier_state = champion_info_list[n].find("td", class_="champion-index-table__cell--change"
-                                                        ).attrs['class'][2
-                                                        ].split("--")[-1]
+                    # 전 티어 순위 변동 상태
+                    change_tier_state = champion_info_list[n].find("td", class_="champion-index-table__cell--change"
+                                                            ).attrs['class'][2
+                                                            ].split("--")[-1]
 
-                # 전 티어 순위 변동 값
-                change_tier_value =  champion_info_list[n].find("td", class_="champion-index-table__cell--change"
-                                                         ).get_text(
-                                                         ).strip()
+                    # 전 티어 순위 변동 값
+                    change_tier_value =  champion_info_list[n].find("td", class_="champion-index-table__cell--change"
+                                                            ).get_text(
+                                                            ).strip()
 
-                # 승률
-                winning_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " + 
-                                                                           "champion-index-table__cell--value")[0
-                                                   ].get_text(
-                                                   ).replace("%", "")
+                    # 승률
+                    winning_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " + 
+                                                                              "champion-index-table__cell--value")[0
+                                                      ].get_text(
+                                                      ).replace("%", "")
 
-                # 픽률
-                pick_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " +
-                                                                        "champion-index-table__cell--value")[1
-                                                ].get_text(
-                                                ).replace("%", "")
+                    # 픽률
+                    pick_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " +
+                                                                            "champion-index-table__cell--value")[1
+                                                    ].get_text(
+                                                    ).replace("%", "")
 
-                # tier 찾기
-                tier = champion_info_list[n].find_all("img")[-1
-                                          ].attrs["src"
-                                          ].split("-")[-1
-                                          ].split(".")[0]
+                    # tier 찾기
+                    tier = champion_info_list[n].find_all("img")[-1
+                                              ].attrs["src"
+                                              ].split("-")[-1
+                                              ].split(".")[0]
 
-                # 다른 라인
-                go_line = champion_info_list[n].find("div", class_="champion-index-table__position"
-                                              ).get_text(
-                                              ).replace("\t", ""
-                                              ).replace("\n", "")
+                    # 다른 라인
+                    go_line = champion_info_list[n].find("div", class_="champion-index-table__position"
+                                                  ).get_text(
+                                                  ).replace("\t", ""
+                                                  ).replace("\n", "")
 
-                # print(data_version, # 버전
-                #       rank_num, # 순위 번호
-                #       change_tier_state, # 순위 변화 상태
-                #       change_tier_value, # 순위 변화량
-                #       line_position, # 가는 라인
-                #       champion_name, # 챔피언 이름
-                #       go_line, # 챔피언이 가는 다른 라인
-                #       winning_rate, # 챔피언 승률
-                #       pick_rate, # 챔피언 픽률
-                #       tier # 티어
-                # )
+                    # print(data_version, # 버전
+                    #       rank_num, # 순위 번호
+                    #       change_tier_state, # 순위 변화 상태
+                    #       change_tier_value, # 순위 변화량
+                    #       line_position, # 가는 라인
+                    #       champion_name, # 챔피언 이름
+                    #       go_line, # 챔피언이 가는 다른 라인
+                    #       winning_rate, # 챔피언 승률
+                    #       pick_rate, # 챔피언 픽률
+                    #       tier # 티어
+                    # )
 
-                # 결과 list에 저장
-                result_list.append([data_version,
-                                    rank_num,
-                                    change_tier_state,
-                                    change_tier_value,
-                                    line_position,
-                                    champion_name,
-                                    go_line,
-                                    winning_rate,
-                                    pick_rate,
-                                    tier])
+                    # 결과 list에 저장
+                    result_list.append([data_version,
+                                        rank_num,
+                                        change_tier_state,
+                                        change_tier_value,
+                                        line_position,
+                                        champion_name,
+                                        go_line,
+                                        winning_rate,
+                                        pick_rate,
+                                        tier])
 
-        return result_list
+            return result_list
+
+        except:
+            logger.error("FUC | OPGG.find_champion_statistics_info  > ")
+
+
+
 
 
 if __name__ == '__main__':
