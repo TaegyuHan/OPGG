@@ -90,7 +90,8 @@ class OPGG():
             for n in range(len(champion_info_list)):
 
                 # rank 순서
-                rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell champion-index-table__cell--rank"
+                rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
+                                                                   "champion-index-table__cell--rank"
                                               ).get_text()
 
                 # line 찾기
@@ -114,12 +115,14 @@ class OPGG():
                                                          ).strip()
 
                 # 승률
-                winning_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell champion-index-table__cell--value")[0
+                winning_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " + 
+                                                                           "champion-index-table__cell--value")[0
                                                    ].get_text(
                                                    ).replace("%", "")
 
                 # 픽률
-                pick_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell champion-index-table__cell--value")[1
+                pick_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " +
+                                                                        "champion-index-table__cell--value")[1
                                                 ].get_text(
                                                 ).replace("%", "")
 
