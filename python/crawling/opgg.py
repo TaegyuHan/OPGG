@@ -55,6 +55,8 @@ class OPGG():
             logger.error("FUC | OPGG.read_html > ")
 
 
+
+
     def html_code_save(self, html, file_name):
         """BeautifulSoup type의 html소스를 받아서
            txt 형태로 저장합니다.
