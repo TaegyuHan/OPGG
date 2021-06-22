@@ -1,7 +1,7 @@
 """
 
   op.gg main 크롤링 코드 입니다.
-  OPGG 클래스 정의 코드
+  Opgg 클래스 정의 코드
 
 """
 
@@ -15,18 +15,12 @@ from log import log
 
 
 
-class OPGG():
+class Opgg():
 
     def __init__(self):
 
         self.logger = log.make_logger("OPGG")
         self.logger.info("CLASS | OPGG > run")
-
-        # 챔피언 통계 
-        self.OPGG_URL = "https://www.op.gg/champion/statistics"
-
-        # 챔피언 BAN 통계
-        self.OPGG_TREND_CHAMP_BAN = "https://www.op.gg/champion/ajax/statistics/trendChampionList/type=banratio&"
 
 
 
@@ -75,4 +69,4 @@ class OPGG():
 
 
 
-        
+

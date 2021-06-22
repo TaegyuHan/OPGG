@@ -1,12 +1,29 @@
-from opgg_main import OPGG
-# 로그
-from log import log
+"""
 
-class OPGG_STATISTICS(OPGG):
+  op.gg 크롤링 코드
+  URL : https://www.op.gg/champion/statistics
+  OpggStatistics 클래스 정의 코드
+
+"""
+
+from opgg_main import Opgg
+
+
+
+class OpggStatistics(Opgg):
 
     def __init__(self):
         super().__init__() # 부모 생성자
         self.logger.info("CLASS | OPGG_STATISTICS > run")
+
+        # 챔피언 통계 
+        self.OPGG_URL = "https://www.op.gg/champion/statistics"
+
+        # 챔피언 BAN 통계
+        self.OPGG_TREND_CHAMP_BAN = "https://www.op.gg/champion/ajax/statistics/trendChampionList/type=banratio&"
+
+
+
 
     def champion_statistics_info(self):
         """챔피언 라인별 티어, 승률, 픽률, 정보
@@ -196,7 +213,5 @@ class OPGG_STATISTICS(OPGG):
         except:
             self.logger.error("FUC | OPGG.champion_statistics_ban_info  > ")
 
-if __name__ == '__main__':
-    a = OPGG_STATISTICS()
-    print(a.champion_statistics_ban_info())
-    
+
+
