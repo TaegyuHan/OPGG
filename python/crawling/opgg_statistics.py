@@ -36,7 +36,7 @@ class OpggStatistics(Opgg):
                     ['11.12', '2', 'stay', '0', 'TOP', 'Sylas', 'Middle, Top', '49.81', '12.39', '1'], ...
         """
 
-        self.logger.info("FUC | OPGG.find_champion_statistics_info > run")
+        self.logger.info("FUC | OpggStatistics.champion_statistics_info > run")
 
         # 결과 저장 리스트
         result_list = []
@@ -62,8 +62,8 @@ class OpggStatistics(Opgg):
                 for n in range(len(champion_info_list)):
 
                     # rank 순서
-                    rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
-                                                                      "champion-index-table__cell--rank"
+                    rank_num = champion_info_list[n].find("td", class_= "champion-index-table__cell "
+                                                                      + "champion-index-table__cell--rank"
                                                   ).get_text()
 
                     # line 찾기
@@ -87,14 +87,14 @@ class OpggStatistics(Opgg):
                                                             ).strip()
 
                     # 승률
-                    winning_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " + 
-                                                                              "champion-index-table__cell--value")[0
+                    winning_rate = champion_info_list[n].find_all("td", class_= "champion-index-table__cell " 
+                                                                              + "champion-index-table__cell--value")[0
                                                       ].get_text(
                                                       ).replace("%", "")
 
                     # 픽률
-                    pick_rate = champion_info_list[n].find_all("td", class_="champion-index-table__cell " +
-                                                                            "champion-index-table__cell--value")[1
+                    pick_rate = champion_info_list[n].find_all("td", class_= "champion-index-table__cell " 
+                                                                           + "champion-index-table__cell--value")[1
                                                     ].get_text(
                                                     ).replace("%", "")
 
@@ -137,7 +137,7 @@ class OpggStatistics(Opgg):
             return result_list
 
         except:
-            self.logger.error("FUC | OPGG.find_champion_statistics_info  > ")
+            self.logger.error("FUC | OpggStatistics.champion_statistics_info  > ")
 
 
 
@@ -153,7 +153,7 @@ class OpggStatistics(Opgg):
                     ['2', 'ALL', 'Ezreal', '56.10'], ...
         """
   
-        self.logger.info("FUC | OPGG.champion_statistics_ban_info > run")
+        self.logger.info("FUC | OpggStatistics.champion_statistics_ban_info > run")
 
         # 결과 저장 리스트
         result_list = []
@@ -174,8 +174,8 @@ class OpggStatistics(Opgg):
                 for n in range(len(champion_info_list)):
 
                     # rank 순서
-                    rank_num = champion_info_list[n].find("td", class_="champion-index-table__cell " +
-                                                                      "champion-index-table__cell--rank"
+                    rank_num = champion_info_list[n].find("td", class_= "champion-index-table__cell " 
+                                                                      + "champion-index-table__cell--rank"
                                                   ).get_text()
 
                     # filter
@@ -211,7 +211,7 @@ class OpggStatistics(Opgg):
             return result_list
 
         except:
-            self.logger.error("FUC | OPGG.champion_statistics_ban_info  > ")
+            self.logger.error("FUC | OpggStatistics.champion_statistics_ban_info  > ")
 
 
 
