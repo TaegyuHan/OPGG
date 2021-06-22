@@ -14,7 +14,7 @@ class OpggStatistics(Opgg):
 
     def __init__(self):
         super().__init__() # 부모 생성자
-        self.logger.info("CLASS | OPGG_STATISTICS > run")
+        self.logger.info("CLASS | OpggStatistics > run")
 
         # 챔피언 통계 
         self.OPGG_URL = "https://www.op.gg/champion/statistics"

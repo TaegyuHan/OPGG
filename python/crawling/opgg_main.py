@@ -20,7 +20,7 @@ class Opgg():
     def __init__(self):
 
         self.logger = log.make_logger("OPGG")
-        self.logger.info("CLASS | OPGG > run")
+        self.logger.info("CLASS | Opgg > run")
 
 
 
