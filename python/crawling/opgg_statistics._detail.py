@@ -48,25 +48,25 @@ class OpggStatisticsDetail(OpggStatistics):
             html = self.read_html(self.OPGG_URL)
             
             ## 티어 챔피언 정보 tag 리스트
-            champion_info_list = html.find("div", class_="champion-index__champion-list"
-                                    ).find_all("a")
+            champion_info_list = \
+              html.find("div", class_="champion-index__champion-list").find_all("a")
 
 
             for n in range(len(champion_info_list)):
 
                 lt = []
 
-                champion_name = champion_info_list[ n
-                                ].find("div", class_="champion-index__champion-item__name"
-                                ).get_text().lower()
+                champion_name = \
+                  champion_info_list[n].find("div", class_="champion-index__champion-item__name"
+                                      ).get_text().lower()
                 
                 # 누누 예외 처리
                 if champion_name == 'nunu & willump':
                     champion_name = 'nunu'
 
-                champion_line = champion_info_list[ n
-                                ].find("div", class_="champion-index__champion-item__positions"
-                                ).find_all("div", class_="champion-index__champion-item__position")
+                champion_line = \
+                  champion_info_list[n].find("div", class_="champion-index__champion-item__positions"
+                    ).find_all("div", class_="champion-index__champion-item__position")
 
                 # 챔피언의 라인 넣기
                 # 1개 이상이 나올 수 있어서 전부 찾아줌
@@ -137,12 +137,17 @@ class OpggStatisticsDetail(OpggStatistics):
             # 결과 딕셔너리
             result_dict = {}
 
-            html = self.read_html("https://www.op.gg/champion/aatrox/statistics/top")
+            html = \
+              self.read_html("https://www.op.gg/champion/aatrox/statistics/top")
+
             tbody = html.find_all("tbody")
 
             # 카운터 챔피언
-            counter_champion = tbody[0].find_all("td", class_="champion-stats-header-matchup__table__champion")
-            counter_winrate = tbody[0].find_all("td", class_="champion-stats-header-matchup__table__winrate")
+            counter_champion = \
+              tbody[0].find_all("td", class_="champion-stats-header-matchup__table__champion")
+
+            counter_winrate = \
+              tbody[0].find_all("td", class_="champion-stats-header-matchup__table__winrate")
 
             result_dict["CounterChampion"] = {}
 
@@ -153,8 +158,11 @@ class OpggStatisticsDetail(OpggStatistics):
 
 
             # 상대하기 쉬운 챔피언
-            counter_champion = tbody[1].find_all("td", class_="champion-stats-header-matchup__table__champion")
-            counter_winrate = tbody[1].find_all("td", class_="champion-stats-header-matchup__table__winrate")
+            counter_champion = \
+              tbody[1].find_all("td", class_="champion-stats-header-matchup__table__champion")
+
+            counter_winrate = \
+              tbody[1].find_all("td", class_="champion-stats-header-matchup__table__winrate")
 
             result_dict["EasyChampion"] = {}
 
@@ -185,7 +193,8 @@ class OpggStatisticsDetail(OpggStatistics):
                     result_dict["Spell"][1]["SpellImage"].append(spell_image)
             
             # spell 픽률
-            spell_pick_list = tbody[2].find_all("td", class_="champion-overview__stats champion-overview__stats--pick")
+            spell_pick_list = \
+              tbody[2].find_all("td", class_="champion-overview__stats champion-overview__stats--pick")
 
             for i in range(len(spell_pick_list)):
                 result_dict["Spell"][i]["PickPercentage"] = \
@@ -196,7 +205,8 @@ class OpggStatisticsDetail(OpggStatistics):
 
 
             # spell 승률
-            spell_win_list = tbody[2].find_all("td", class_="champion-overview__stats champion-overview__stats--win")
+            spell_win_list = \
+              tbody[2].find_all("td", class_="champion-overview__stats champion-overview__stats--win")
             for i in range(len(spell_win_list)):
                 result_dict["Spell"][i]["WinRate"] = \
                   spell_win_list[i].find("strong").get_text().replace("%", "")
@@ -258,7 +268,8 @@ class OpggStatisticsDetail(OpggStatistics):
             result_dict["Rune"][1] = {}
 
             # 룬 헤더 이미지
-            rune_img_list = tbody[6].find_all("div", class_="champion-stats-summary-rune-image")
+            rune_img_list = \
+              tbody[6].find_all("div", class_="champion-stats-summary-rune-image")
             for i in range(len(rune_img_list)):
                 il = []
                 for img in rune_img_list[i].find_all("img"):
@@ -267,8 +278,10 @@ class OpggStatisticsDetail(OpggStatistics):
                 result_dict["Rune"][i]["HeaderInfoImage"] = il
 
             # 룬 헤더 이름, 픽률, 승률
-            rune_name = tbody[6].find_all("div", class_="champion-stats-summary-rune__name")
-            rune_rate = tbody[6].find_all("div", class_="champion-stats-summary-rune__rate")
+            rune_name = \
+              tbody[6].find_all("div", class_="champion-stats-summary-rune__name")
+            rune_rate = \
+              tbody[6].find_all("div", class_="champion-stats-summary-rune__rate")
 
             for i in range(len(rune_name)):
                 result_dict["Rune"][i]["HeaderRuneName"] = \
