@@ -1,7 +1,7 @@
 """
 
   op.gg 크롤링 코드
-  URL : https://www.op.gg/champion/garen/statistics/top/item
+  URL : https://www.op.gg/champion/{}/statistics/{}/item
   OpggStatisticsDetailItem 클래스 정의 코드
 
 """
