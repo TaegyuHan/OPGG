@@ -115,12 +115,31 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                   spell_win_list[i].find("strong").get_text().replace("%", "")
 
             # 챔피언 스킬
-            result_dict["SkillBuild"] = []
-
+            result_dict["SkillBuild"] = {}
+            result_dict["SkillBuild"]["Sequence"] = []
+            
+            # 스킬 순서
             skill_list = tbody[4].find_all("td")
             for i in range(len(skill_list)):
                 skill = skill_list[i].get_text().strip()
-                result_dict["SkillBuild"].append(skill)
+                result_dict["SkillBuild"]["Sequence"].append(skill)
+            
+            # 스킬 픽률
+            result_dict["SkillBuild"]["PickPercentage"] = \
+              tbody[3].find("td", class_="champion-overview__stats--pick"
+              ).find("strong").get_text().replace("%", "")
+
+            # 스킬 픽 수
+            result_dict["SkillBuild"]["PickCount"] = \
+              tbody[3].find("td", class_="champion-overview__stats--pick"
+              ).find("span").get_text().replace("%", "")              
+
+            # 스킬 승률
+            result_dict["SkillBuild"]["WinRate"] = \
+              tbody[3].find("td", class_="champion-overview__stats--win"
+              ).find("strong").get_text().replace("%", "")
+
+
 
             # 챔피언 게임시작 아이템
             result_dict["ItemBuild"] = {}
