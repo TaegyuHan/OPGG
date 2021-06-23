@@ -2,7 +2,7 @@
 
   op.gg 크롤링 코드
   URL : https://www.op.gg/champion/garen/statistics/top
-  OpggStatisticsDetail 클래스 정의 코드
+  OpggStatisticsDetailSynthesize 클래스 정의 코드
 
 """
 
@@ -34,7 +34,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                     'EasyChampion': {'Lucian': ... }
         """
 
-        self.logger.info("FUC | OpggStatisticsDetail.champion_detail_synthesize > run")
+        self.logger.info("FUC | OpggStatisticsDetailSynthesize.champion_detail_synthesize > run")
 
         try:
             # 결과 딕셔너리
@@ -249,8 +249,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             return result_dict
 
         except:
-            self.logger.error("FUC | OpggStatisticsDetail.champion_detail_synthesize  > ")
+            self.logger.error("FUC | OpggStatisticsDetailSynthesize.champion_detail_synthesize  > ")
 
 
 
-            
