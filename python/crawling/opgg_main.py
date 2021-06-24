@@ -8,14 +8,18 @@
 from bs4 import BeautifulSoup
 import requests
 
+import sys
+sys.path.append("../")
+
 # 로그
 from log import log
 
 
 
 
-
 class Opgg():
+
+
 
     def __init__(self):
 
@@ -66,7 +70,6 @@ class Opgg():
         f = open(file_name, "w", -1, "utf-8")
         f.write(str(html))
         f.close()
-
 
 
 
