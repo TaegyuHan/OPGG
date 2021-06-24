@@ -6,11 +6,11 @@
 """
 
 import pymongo
-
 import sys
-sys.path.append("../../")
-from log import log # 로그
 
+
+sys.path.append("..\\..\\")
+from log import log # 로그
 
 
 
@@ -49,4 +49,8 @@ class MongoDB_DB():
             self.logger.error("CLASS | DB connect | > error")
 
 
-
+if __name__ == '__main__':
+    a = MongoDB_DB(
+        collection_name = "championInfo"
+    )
+    

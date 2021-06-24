@@ -6,7 +6,8 @@
 import mysql.connector
 
 import sys
-sys.path.append("../../")
+
+sys.path.append("..\\..\\")
 from log import log # 로그
 
 

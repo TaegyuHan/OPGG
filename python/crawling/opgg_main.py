@@ -7,12 +7,11 @@
 
 from bs4 import BeautifulSoup
 import requests
-
 import sys
-sys.path.append("../")
 
-# 로그
-from log import log
+sys.path.append("..\\")
+from log import log # 로그
+
 
 
 
