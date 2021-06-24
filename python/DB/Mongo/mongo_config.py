@@ -41,7 +41,7 @@ class MongoDB_DB():
 
         try:
             self.client = pymongo.MongoClient(client)
-            self.db = self.client[daabase] # Database
+            self.db = self.client[database] # Database
             self.cursor = self.db[collection] # Collection
             self.logger.info("CLASS | MySQL_DB > success")
 
