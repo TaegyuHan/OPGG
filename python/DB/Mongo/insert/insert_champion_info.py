@@ -1,5 +1,13 @@
 # -*- coding: utf-8 -*-
 
+"""
+   DB : MongoDB
+   Database : opgg
+   Collection : championInfo
+
+   데이터 입력 code
+"""
+
 import sys
 import os
 import json
