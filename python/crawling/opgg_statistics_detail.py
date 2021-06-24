@@ -110,4 +110,4 @@ class OpggStatisticsDetail(OpggStatistics):
             self.logger.error("FUC | OpggStatisticsDetail.champion_line_url  > ")
 
 
-
+    

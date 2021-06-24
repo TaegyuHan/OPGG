@@ -12,6 +12,8 @@ from opgg_main import Opgg
 
 class OpggStatistics(Opgg):
 
+
+
     def __init__(self):
         super().__init__() # 부모 생성자
         self.logger.info("CLASS | OpggStatistics > run")
