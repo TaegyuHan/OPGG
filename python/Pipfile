@@ -1,0 +1,17 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+requests = "*"
+beautifulsoup4 = "*"
+mysql-connector-python = "*"
+mysqlclient = "*"
+mysql-connector-python-rf = "*"
+pathlib = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.9"
