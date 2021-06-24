@@ -8,8 +8,9 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
+import os
 
-sys.path.append("..\\")
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from log import log # 로그
 
 
@@ -69,6 +70,7 @@ class Opgg():
         f = open(file_name, "w", -1, "utf-8")
         f.write(str(html))
         f.close()
+
 
 
 
