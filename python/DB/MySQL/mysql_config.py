@@ -4,11 +4,10 @@
 """
 
 import mysql.connector
+
 import sys
 sys.path.append("../../")
-
-# 로그
-from log import log
+from log import log # 로그
 
 
 
@@ -20,7 +19,7 @@ class MySQL_DB():
     def __init__(self):
 
         # 로그 생성
-        self.logger = log.make_logger("OPGG DB")
+        self.logger = log.make_logger("MySQL_DB")
         self.logger.info("CLASS | MySQL_DB > run")
 
         # DB 연결
