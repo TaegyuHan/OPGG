@@ -7,7 +7,7 @@
 import logging
 
 # log 저장 경로
-LOG_PATH = "C:/github/OPGG/python/crawling/log/example.log"
+LOG_PATH = "C:/github/OPGG/python/log/example.log"
 
 
 
