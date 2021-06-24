@@ -24,13 +24,18 @@ class MySQL_DB():
         self.logger.info("CLASS | MySQL_DB > run")
 
         # DB 연결
-        self.DB = mysql.connector.connect(
-                        host="127.0.0.1",
-                        user="root",
-                        password="",
-                        database="opgg"
-                  )
+        try:
+            self.DB = mysql.connector.connect(
+                            host="127.0.0.1",
+                            user="root",
+                            password="",
+                            database="opgg"
+                    )
+                    
+            self.logger.info("CLASS | DB connect | > success")
 
+        except:
+            self.logger.error("CLASS | DB connect | > error")
 
 
 
