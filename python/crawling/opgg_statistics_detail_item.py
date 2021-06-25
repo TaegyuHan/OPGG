@@ -9,6 +9,10 @@
 
 import re
 import sys
+import os
+
+
+sys.path.append(os.path.dirname(__file__))
 from opgg_statistics_detail import OpggStatisticsDetail
 
 
@@ -29,11 +33,19 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
 
         Returns:
             [json]: 아이템
-            ex ) : {'CoreBuild': {0: {'item': ['6630.png', '3053.png', '6333.png'], 
-                                      'PickPercentage': '20.19', 
-                                      'PickCount': '3,439', 
-                                      'WinRate': '61.88'}, 
-                                  1: {' ...
+            ex ) : {
+                      "CoreBuild": {
+                        "0": {
+                          "item": [
+                            6630,
+                            3053,
+                            6333
+                          ],
+                          "PickPercentage": 19.19,
+                          "PickCount": 176,
+                          "WinRate": 60.23
+                        },
+                        "1": {
         """
 
         self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
@@ -58,36 +70,46 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
                 title = \
                   html.find_all("thead")[thead_num].find("th", class_="champion-stats__table__header--title"
                   ).get_text().replace(" ", "")
-                print("title >", title)
+
                 result_dict[title] = {}
 
                 # 아이템 이미지
                 # 핵심 빌드, 시작 아이템 list
                 if tbody_num in (2, 4):
                     ul = html.find_all("tbody")[tbody_num].find_all("ul", class_="champion-stats__list")
+
                     for i in range(len(ul)):
                         result_dict[title][i] = {}
                         img = ul[i].find_all("img")
                         il = []
+
                         for j in range(len(img)):
                             img_src = img[j]["src"]
                             item_image = re.search(pattern, img_src).group()
                             if item_image == "blet.png": continue
+
+                            item_image = int(item_image.split(".")[0])
                             il.append(item_image)
+
                         result_dict[title][i]["item"] = il
                 
                 # 신발, 아이템 list
                 if tbody_num in (3, 5):
                     ul = html.find_all("tbody")[tbody_num].find_all("div", class_="champion-stats__single__item")
+
                     for i in range(len(ul)):
                         result_dict[title][i] = {}
                         img = ul[i].find_all("img")
                         il = []
+
                         for j in range(len(img)):
                             img_src = img[j]["src"]
                             item_image = re.search(pattern, img_src).group()
                             if item_image == "blet.png": continue
+
+                            item_image = int(item_image.split(".")[0])
                             il.append(item_image)
+
                         result_dict[title][i]["item"] = il
 
                 # 픽률 , 픽수
@@ -113,9 +135,20 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
                     # 픽 승률
                     pick2 = td2[i].get_text().replace("%", "")
 
-                    result_dict[title][i]["PickPercentage"] = pick1[0].replace("%", "")
-                    result_dict[title][i]["PickCount"] = pick1[1]
-                    result_dict[title][i]["WinRate"] = pick2
+                    result_dict[title][i]["PickPercentage"] = \
+                      float(
+                        pick1[0].replace("%", "")
+                      )
+
+                    result_dict[title][i]["PickCount"] = \
+                      int(
+                        pick1[1].replace(",", "")
+                      )
+
+                    result_dict[title][i]["WinRate"] = \
+                      float(
+                        pick2
+                      )
 
             return result_dict
 
