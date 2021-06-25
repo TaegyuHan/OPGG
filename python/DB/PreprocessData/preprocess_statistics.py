@@ -25,7 +25,7 @@ class PreprocessStatistics():
 
 
     def __init__(self):
-        
+
         # 로그 설정
         self.logger = log.make_logger("Preprocess Data")
         self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
@@ -65,9 +65,6 @@ class PreprocessStatistics():
             # 크롤링 DB 넣기전 전처리
             for tmp_dict in self.crawling.champion_statistics_info():
 
-                # 번호 string > int
-                tmp_dict["rankNum"] = int(tmp_dict["rankNum"])
-
                 # changeTierState 챔피언 티어 상태
                 # line string > int
                 compare = tmp_dict["changeTierState"]
@@ -78,9 +75,6 @@ class PreprocessStatistics():
                     tmp_dict["changeTierState"] = 1
                 elif compare == "down":
                     tmp_dict["changeTierState"] = -1
-                    
-                # 챔피언 상승 값
-                tmp_dict["changeTierValue"] = int(tmp_dict["changeTierValue"])
 
                 # 챔피언 포지션
                 # line string > int
@@ -95,9 +89,6 @@ class PreprocessStatistics():
                     tmp_dict["linePosition"] = 3
                 elif compare == "SUPPORT":
                     tmp_dict["linePosition"] = 4
-
-                # 챔피언 이름
-                tmp_dict["championName"]
 
                 # 챔피언 가는 라인
                 li = []
@@ -117,16 +108,9 @@ class PreprocessStatistics():
 
                 tmp_dict["goLine"] = li
 
-                # 승률 string > float
-                tmp_dict["winningRate"] = float(tmp_dict["winningRate"])
-                
-                # 픽률 string > float
-                tmp_dict["pickRate"] = float(tmp_dict["pickRate"])
-
-                # 티어 strting > int
-                tmp_dict["tier"] = int(tmp_dict["tier"])
-
                 result_list.append(tmp_dict)
+
+
 
             return result_list
 
@@ -158,9 +142,6 @@ class PreprocessStatistics():
 
             for tmp_dict in self.crawling.champion_statistics_ban_info():
 
-                # 챔피언 랭크 번호
-                tmp_dict["rankNum"] = int(tmp_dict["rankNum"])
-
                 # 챔피언 포지션
                 compare = tmp_dict["lineFilter"]
                 if compare == "ALL":
@@ -176,12 +157,6 @@ class PreprocessStatistics():
                 elif compare == "SUPPORT":
                     tmp_dict["lineFilter"] = 4
 
-                # 챔피언 이름
-                tmp_dict["championName"]
-
-                #  밴률
-                tmp_dict["banRate"] = float(tmp_dict["banRate"])
-
                 result_list.append(tmp_dict)
 
             return result_list
@@ -193,10 +168,9 @@ class PreprocessStatistics():
 
 
 
-if __name__ == '__main__':
-    a = PreprocessStatistics()
-    # print(a.prepro_champion_statistics_info())
-    print(a.prepro_champion_statistics_ban_info())
 
-
+# if __name__ == '__main__':
+#     a = PreprocessStatistics()
+#     print(a.prepro_champion_statistics_info())
+#     print(a.prepro_champion_statistics_ban_info())
 
