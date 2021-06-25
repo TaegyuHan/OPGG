@@ -5,7 +5,10 @@
   OpggStatistics 클래스 정의 코드
 
 """
+import sys
+import os
 
+sys.path.append(os.path.dirname(__file__))
 from opgg_main import Opgg
 
 
@@ -123,18 +126,22 @@ class OpggStatistics(Opgg):
                     #       pick_rate, # 챔피언 픽률
                     #       tier # 티어
                     # )
+                    
+                    tmp_dict = {}
+
+                    tmp_dict["version"] = data_version
+                    tmp_dict["rankNum"] = rank_num
+                    tmp_dict["changeTierState"] = change_tier_state
+                    tmp_dict["changeTierValue"] = change_tier_value
+                    tmp_dict["linePosition"] = line_position
+                    tmp_dict["championName"] = champion_name
+                    tmp_dict["goLine"] = go_line
+                    tmp_dict["winningRate"] = winning_rate
+                    tmp_dict["pickRate"] = pick_rate
+                    tmp_dict["tier"] = tier
 
                     # 결과 list에 저장
-                    result_list.append([data_version,
-                                        rank_num,
-                                        change_tier_state,
-                                        change_tier_value,
-                                        line_position,
-                                        champion_name,
-                                        go_line,
-                                        winning_rate,
-                                        pick_rate,
-                                        tier])
+                    result_list.append(tmp_dict)
 
             return result_list
 
@@ -202,13 +209,15 @@ class OpggStatistics(Opgg):
                     #    ban_rate # 밴률
                     # )
 
+                    tmp_dict = {}
+
+                    tmp_dict["rankNum"] = rank_num
+                    tmp_dict["lineFilter"] = line_filter
+                    tmp_dict["championName"] = champion_name
+                    tmp_dict["banRate"] = ban_rate
+
                     # 결과 list에 저장
-                    result_list.append([
-                      rank_num,
-                      line_filter,
-                      champion_name,
-                      ban_rate
-                    ])
+                    result_list.append(tmp_dict)
 
             return result_list
 
@@ -216,4 +225,8 @@ class OpggStatistics(Opgg):
             self.logger.error("FUC | OpggStatistics.champion_statistics_ban_info  > ")
 
 
+# if __name__ == '__main__':
+#     a = OpggStatistics()
+#     print(a.champion_statistics_info())
+#     print(a.champion_statistics_ban_info())
 
