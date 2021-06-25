@@ -24,7 +24,7 @@ class MongoDB_DB():
 
         # 로그 생성
         self.logger = log.make_logger("MongoDB_DB")
-        self.logger.info("CLASS | MongoDB_DB > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
         # 접속 경로
         self.client = "mongodb://localhost:27017/"
@@ -39,18 +39,19 @@ class MongoDB_DB():
             [class]: <class 'pymongo.cursor.Cursor'>
         """
 
-        self.logger.info("FUC | DB connect | > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
             self.client = pymongo.MongoClient(self.client)
             self.db = self.client[self.database] # Database
             self.cursor = self.db[self.collection] # Collection
-            self.logger.info("FUC | DB connect | > success")
+            self.logger.info("FUC | {} > success".format(sys._getframe().f_code.co_name))
+            
 
             return self.cursor
 
         except:
-            self.logger.error("FUC | DB connect | > error")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 

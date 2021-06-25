@@ -24,7 +24,7 @@ class Opgg():
     def __init__(self):
 
         self.logger = log.make_logger("OPGG")
-        self.logger.info("CLASS | Opgg > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
 
 
@@ -39,7 +39,7 @@ class Opgg():
             [class(bs4.BeautifulSoup)]: BeautifulSoup
         """
 
-        self.logger.info("FUC | OPGG.read_html > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         # 접속 정보
         # hdr = { 'Accept-Language' : 'ko_KR,en;q=0.8' }
@@ -52,7 +52,7 @@ class Opgg():
             return soup
 
         except:
-            self.logger.error("FUC | OPGG.read_html > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 
@@ -65,7 +65,7 @@ class Opgg():
             [class(bs4.BeautifulSoup)]: BeautifulSoup
         """
 
-        self.logger.info("FUC | OPGG.html_code_save > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         f = open(file_name, "w", -1, "utf-8")
         f.write(str(html))

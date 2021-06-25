@@ -5,6 +5,7 @@
   OpggStatisticsDetail 클래스 정의 코드
 
 """
+import sys
 
 from opgg_statistics import OpggStatistics
 
@@ -16,7 +17,7 @@ class OpggStatisticsDetail(OpggStatistics):
 
     def __init__(self):
         super().__init__() # 부모 생성자
-        self.logger.info("CLASS | OpggStatisticsDetail > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
 
 
@@ -30,7 +31,7 @@ class OpggStatisticsDetail(OpggStatistics):
                 {'aatrox': ['top', 'mid'], 'ahri': ['mid'], ... }
         """
 
-        self.logger.info("FUC | OpggStatisticsDetail.champion_line > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
             # 결과 저장 리스트
@@ -75,7 +76,7 @@ class OpggStatisticsDetail(OpggStatistics):
             return result_dict
 
         except:
-            self.logger.error("FUC | OpggStatisticsDetail.champion_line  > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 
@@ -91,7 +92,7 @@ class OpggStatisticsDetail(OpggStatistics):
                     ... ]
         """
 
-        self.logger.info("FUC | OpggStatisticsDetail.champion_line_url > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
             result_list = []
@@ -107,7 +108,7 @@ class OpggStatisticsDetail(OpggStatistics):
             return result_list
 
         except:
-            self.logger.error("FUC | OpggStatisticsDetail.champion_line_url  > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
     

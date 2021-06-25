@@ -19,7 +19,7 @@ class OpggStatistics(Opgg):
 
     def __init__(self):
         super().__init__() # 부모 생성자
-        self.logger.info("CLASS | OpggStatistics > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
         # 챔피언 통계 
         self.OPGG_URL = "https://www.op.gg/champion/statistics"
@@ -41,7 +41,7 @@ class OpggStatistics(Opgg):
                     ['11.12', '2', 'stay', '0', 'TOP', 'Sylas', 'Middle, Top', '49.81', '12.39', '1'], ...
         """
 
-        self.logger.info("FUC | OpggStatistics.champion_statistics_info > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         # 결과 저장 리스트
         result_list = []
@@ -146,7 +146,7 @@ class OpggStatistics(Opgg):
             return result_list
 
         except:
-            self.logger.error("FUC | OpggStatistics.champion_statistics_info  > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 
@@ -162,7 +162,7 @@ class OpggStatistics(Opgg):
                     ['2', 'ALL', 'Ezreal', '56.10'], ...
         """
   
-        self.logger.info("FUC | OpggStatistics.champion_statistics_ban_info > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         # 결과 저장 리스트
         result_list = []
@@ -222,7 +222,7 @@ class OpggStatistics(Opgg):
             return result_list
 
         except:
-            self.logger.error("FUC | OpggStatistics.champion_statistics_ban_info  > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 # if __name__ == '__main__':

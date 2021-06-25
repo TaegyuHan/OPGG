@@ -22,7 +22,7 @@ class MySQL_DB():
 
         # 로그 생성
         self.logger = log.make_logger("MySQL_DB")
-        self.logger.info("CLASS | MySQL_DB > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
         # DB 연결
         try:

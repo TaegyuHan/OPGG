@@ -8,6 +8,7 @@
 
 
 import re
+import sys
 from opgg_statistics_detail import OpggStatisticsDetail
 
 
@@ -18,7 +19,7 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
 
     def __init__(self):
         super().__init__() # 부모 생성자
-        self.logger.info("CLASS | OpggStatisticsDetailItem > run")
+        self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
 
 
@@ -35,7 +36,7 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
                                   1: {' ...
         """
 
-        self.logger.info("FUC | OpggStatisticsDetailItem.champion_detail_item > run")
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
             # 결과 딕셔너리
@@ -119,7 +120,7 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
             return result_dict
 
         except:
-            self.logger.error("FUC | OpggStatisticsDetail.champion_detail_item  > ")
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 
