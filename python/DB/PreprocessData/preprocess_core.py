@@ -76,3 +76,65 @@ class PreprocessCore():
 
         except:
             self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
+
+
+
+
+    def chage_num_PPW(self, tmp_dict, input_key):
+        """json 데이터에서
+
+            "Spell": {
+              "0": {
+                "SpellImage": [
+                  "SummonerFlash.png",
+                  "SummonerTeleport.png"
+                ],
+                "PickPercentage": "97.53",
+                "PickCount": "3,439",
+                "WinRate": "49.46"
+              },
+              "1": {
+                "SpellImage": [
+                  "SummonerFlash.png",
+                  "SummonerDot.png"
+                ],
+                "PickPercentage": "2.01",
+                "PickCount": "71",
+                "WinRate": "66.2"
+              }
+            }
+
+          번호형으로 됀 dict 안에 
+                "PickPercentage": "2.01", > 2.01
+                "PickCount": "71", > 71
+                "WinRate": "66.2" > 66.2
+          수정 string > int, float
+
+        Args:
+            tmp_dict ([dict]]) : json 딕셔너리
+            input_key ([string]): json 딕셔너리 키값
+
+        Returns:
+            [dict]: 변경후의 json 값
+        """
+
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
+
+        try:
+            for k in tmp_dict[input_key].keys():
+      
+                tmp_dict[input_key][k]["PickPercentage"] = \
+                    float(tmp_dict[input_key][k]["PickPercentage"])
+                
+                # 에러 때문에 tmp 생성
+                tmp_dict[input_key][k]["PickCount"] = \
+                    int(tmp_dict[input_key][k]["PickCount"].replace(",", ""))
+                    
+
+                tmp_dict[input_key][k]["WinRate"] = \
+                    float(tmp_dict[input_key][k]["WinRate"])
+
+            return tmp_dict
+
+        except:
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
