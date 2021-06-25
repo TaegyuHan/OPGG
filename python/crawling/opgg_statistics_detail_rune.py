@@ -9,7 +9,11 @@
 
 import re
 import sys
+import os
+
 from time import sleep
+
+sys.path.append(os.path.dirname(__file__))
 from opgg_statistics_detail import OpggStatisticsDetail
 
 
@@ -64,6 +68,7 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                     img_src = images_list[j]["src"]
                     img_class = images_list[j]["class"]
                     item_image = re.search(pattern, img_src).group()
+                    item_image = int(item_image.split(".")[0])
 
                     run_style = img_class[1].split("--")[-1].capitalize()
                     result_dict[i][run_style] = item_image
@@ -74,7 +79,9 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
 
                 for j in range(len(winrate)):
                     result_dict[i]["PickPercentage"] = \
-                      winrate[j].find("b").get_text().replace("%", "")
+                      float(
+                        winrate[j].find("b").get_text().replace("%", "")
+                      )
 
                 # 승률
                 winrate = \
@@ -82,7 +89,9 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                   
                 for j in range(len(winrate)):
                     result_dict[i]["WinRate"] = \
-                      winrate[j].find("b").get_text().replace("%", "")
+                      float(
+                        winrate[j].find("b").get_text().replace("%", "")
+                      )
 
             # 룬 URL 제작
             self.RUNE_AJAX_URL = \
@@ -114,6 +123,7 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                         img_src = div[j].find("img")["src"]
                         img_name = div[j].find("img")["alt"]
                         rune_image = re.search(pattern, img_src).group()
+                        rune_image = int(rune_image.split(".")[0])
                         result_dict[k]["Detail"][i][img_name] = rune_image
 
                 # 룬 etc
@@ -126,6 +136,7 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                         img_src = img[j]["src"]
                         img_name = img[j]["alt"]
                         rune_image = re.search(pattern, img_src).group()
+                        rune_image = int(rune_image.split(".")[0])
                         iln.append(img_name)
                         il.append(rune_image)
                     result_dict[k]["Detail"][i]["EtcRuneImage"] = il
@@ -143,11 +154,20 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                   pick = \
                     td_pickrate[i].get_text().replace(" ", "").strip().split("%")
 
-                  result_dict[k]["Detail"][i]["PickPercentage"] = pick[0]
-                  result_dict[k]["Detail"][i]["PickCount"] = pick[1]
+                  result_dict[k]["Detail"][i]["PickPercentage"] = \
+                    float(
+                      pick[0]
+                    )
+                    
+                  result_dict[k]["Detail"][i]["PickCount"] = \
+                    int(
+                      pick[1].replace(",", "")
+                    )
 
                   result_dict[k]["Detail"][i]["WinRate"] = \
-                    td_winrate[i].get_text().replace("%", "")
+                    float(
+                      td_winrate[i].get_text().replace("%", "")
+                    )
         
             return result_dict
     
