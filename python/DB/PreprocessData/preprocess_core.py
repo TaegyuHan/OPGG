@@ -138,3 +138,45 @@ class PreprocessCore():
 
         except:
             self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
+
+
+
+
+    def chage_item(self, tmp_dict, input_key):
+        """dict의 item 들의 .png 형태를
+           int 형으로 변환후 return 합니다.
+
+              {
+                "Images": [
+                  "1054.png", > 1054
+                  "2003.png"  > 2003
+                ],
+                "PickPercentage": "64.53",
+                "PickCount": "2,230",
+                "WinRate": "48.79%"
+              }
+
+        Args:
+            tmp_dict ([dict]): dict 형태 정보
+                               dict안에 list 형의 image 정보만
+                               변환이 가능합니다.
+
+            input_key ([string]): 변환 list의 키를 입력합니다.
+                ex ) : "Images"
+
+        Returns:
+            [dict]: 변환 후 결과 dict를 반환 합니다.
+        """
+
+        self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
+
+        try:
+          for i in range(len(tmp_dict[input_key])):
+
+              tmp_dict[input_key][i] = \
+                  int(tmp_dict[input_key][i].split(".")[0])
+
+          return tmp_dict
+          
+        except:
+            self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
