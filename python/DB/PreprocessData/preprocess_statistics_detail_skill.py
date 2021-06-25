@@ -1,7 +1,7 @@
 """
    DB : MongoDB
    Database : opgg
-   Collection : championDetailSynthesize
+   Collection : championDetailSkill 
 
    데이터 입력 code
 """
@@ -68,4 +68,3 @@ class PreprocessStatisticsDetailSkill():
 # if __name__ == "__main__":
 #     a = PreprocessStatisticsDetailSkill()
 #     print(a.prepro_champion_detail_skill(266, "TOP"))
-    
