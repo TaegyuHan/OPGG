@@ -8,7 +8,10 @@
 
 
 import re
+import os
 import sys
+
+sys.path.append(os.path.dirname(__file__))
 from opgg_statistics_detail import OpggStatisticsDetail
 
 
@@ -58,7 +61,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             for i in range(len(counter_champion)):
               cc = counter_champion[i].get_text().strip() # 카운터 챔피언 
               cw = counter_winrate[i].find("b").get_text().replace("%", "") # 카운터 챔피언  승률
-              result_dict["CounterChampion"][cc] = cw
+              result_dict["CounterChampion"][cc] = float(cw)
 
 
             # 상대하기 쉬운 챔피언
@@ -73,7 +76,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             for i in range(len(counter_champion)):
               cc = counter_champion[i].get_text().strip() # 카운터 챔피언 
               cw = counter_winrate[i].find("b").get_text().replace("%", "") # 카운터 챔피언  승률
-              result_dict["EasyChampion"][cc] = cw
+              result_dict["EasyChampion"][cc] = float(cw)
 
 
             # 챔피언 스펠
@@ -91,6 +94,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
 
             for i in range(len(spell_list)):
                 spell_image = re.search(pattern, spell_list[i].img["src"]).group()
+                spell_image = spell_image.split(".")[0]
                 if i//2 == 0:
                     result_dict["Spell"][0]["SpellImage"].append(spell_image)
                 else:
@@ -102,10 +106,14 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
 
             for i in range(len(spell_pick_list)):
                 result_dict["Spell"][i]["PickPercentage"] = \
-                  spell_pick_list[i].find("strong").get_text().replace("%", "")
+                  float(
+                    spell_pick_list[i].find("strong").get_text().replace("%", "")
+                  )
 
                 result_dict["Spell"][i]["PickCount"] = \
-                  spell_pick_list[i].find("span").get_text()
+                  int(
+                    spell_pick_list[i].find("span").get_text().replace(",", "")
+                  )
 
 
             # spell 승률
@@ -113,7 +121,9 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
               tbody[2].find_all("td", class_="champion-overview__stats champion-overview__stats--win")
             for i in range(len(spell_win_list)):
                 result_dict["Spell"][i]["WinRate"] = \
-                  spell_win_list[i].find("strong").get_text().replace("%", "")
+                  float(
+                    spell_win_list[i].find("strong").get_text().replace("%", "")
+                  )
 
             # 챔피언 스킬
             result_dict["SkillBuild"] = {}
@@ -127,18 +137,27 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             
             # 스킬 픽률
             result_dict["SkillBuild"]["PickPercentage"] = \
-              tbody[3].find("td", class_="champion-overview__stats--pick"
-              ).find("strong").get_text().replace("%", "")
+              float(
+                tbody[3].find("td", class_="champion-overview__stats--pick"
+                ).find("strong").get_text().replace("%", "")
+              )
+
+
 
             # 스킬 픽 수
             result_dict["SkillBuild"]["PickCount"] = \
-              tbody[3].find("td", class_="champion-overview__stats--pick"
-              ).find("span").get_text().replace("%", "")              
+              int(
+                tbody[3].find("td", class_="champion-overview__stats--pick"
+                ).find("span").get_text().replace(",", "")  
+              )
+            
 
             # 스킬 승률
             result_dict["SkillBuild"]["WinRate"] = \
-              tbody[3].find("td", class_="champion-overview__stats--win"
-              ).find("strong").get_text().replace("%", "")
+              float(
+                tbody[3].find("td", class_="champion-overview__stats--win"
+                ).find("strong").get_text().replace("%", "")
+              )
 
 
 
@@ -165,23 +184,32 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                 # 이미지 추출
                 for tag in item_list[i].find_all("img"): # 이미지 리스트에 넣기
                     item_image = re.search(pattern, tag["src"]).group()
+
                     # blet.png 이미지 제거
                     if item_image == "blet.png": continue
+
+                    item_image = int(item_image.split(".")[0])
                     il.append(item_image)
 
                 result_dict["ItemBuild"][dict_tmp_name][i]["Images"] = il # 이미지 리스트
 
                 # 픽률
                 result_dict["ItemBuild"][dict_tmp_name][i]["PickPercentage"] = \
-                  item_list[i].find("strong").get_text().replace("%", "")
+                  float(
+                    item_list[i].find("strong").get_text().replace("%", "")
+                  )
 
                 # 픽 횟수
                 result_dict["ItemBuild"][dict_tmp_name][i]["PickCount"] = \
-                  item_list[i].find("span").get_text()
+                  int(
+                    item_list[i].find("span").get_text().replace(",", "")
+                  )
 
                 # 픽 승률
                 result_dict["ItemBuild"][dict_tmp_name][i]["WinRate"] = \
-                  item_list[i].find_all("strong")[1].get_text()
+                  float(
+                    item_list[i].find_all("strong")[1].get_text().replace("%", "")
+                  )
 
 
 
@@ -197,6 +225,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                 il = []
                 for img in rune_img_list[i].find_all("img"):
                     rune_image = re.search(pattern, img["src"]).group()
+                    rune_image = int(rune_image.split(".")[0])
                     il.append(rune_image)
                 result_dict["Rune"][i]["HeaderInfoImage"] = il
 
@@ -211,10 +240,14 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                   rune_name[i].get_text()
                   
                 result_dict["Rune"][i]["HeaderPickPercentage"] = \
-                  rune_rate[i].find("strong").get_text().replace("%", "")
+                  float(
+                    rune_rate[i].find("strong").get_text().replace("%", "")
+                  )
                   
                 result_dict["Rune"][i]["HeaderWinRate"] = \
-                  rune_rate[i].find_all("span")[2].get_text().replace("%", "")
+                  float(
+                    rune_rate[i].find_all("span")[2].get_text().replace("%", "")
+                  )
 
             # 첫번째 룬 정보 > 7
             # 두번째 룬 정보 > 8
@@ -233,6 +266,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                         img_src = div[j].find("img")["src"]
                         img_name = div[j].find("img")["alt"]
                         rune_image = re.search(pattern, img_src).group()
+                        rune_image = int(rune_image.split(".")[0])
                         result_dict["Rune"][m]["RuneChoice"][i][img_name] = rune_image
 
                 # 룬 etc
@@ -245,6 +279,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                         img_src = img[j]["src"]
                         img_name = img[j]["alt"]
                         rune_image = re.search(pattern, img_src).group()
+                        rune_image = int(rune_image.split(".")[0])
                         iln.append(img_name)
                         il.append(rune_image)
                     result_dict["Rune"][m]["RuneChoice"][i]["EtcRuneImage"] = il
@@ -254,10 +289,14 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                 td = tbody[n].find_all("td", class_="champion-overview__stats")
                 for i in range(len(td)):
                   result_dict["Rune"][m]["RuneChoice"][i]["PickPercentage"] = \
-                    td[i].find_all("strong")[0].get_text().replace("%", "")
+                    float(
+                      td[i].find_all("strong")[0].get_text().replace("%", "")
+                    )
 
                   result_dict["Rune"][m]["RuneChoice"][i]["PickCount"] = \
-                    td[i].find_all("span")[1].get_text()
+                    int(
+                      td[i].find_all("span")[1].get_text().replace(",", "")
+                    )
 
                   result_dict["Rune"][m]["RuneChoice"][i]["WinRate"] = \
                     td[i].find_all("strong")[1].get_text().replace("%", "")

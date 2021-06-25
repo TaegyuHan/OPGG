@@ -132,13 +132,13 @@ class OpggStatistics(Opgg):
                     tmp_dict["version"] = data_version
                     tmp_dict["rankNum"] = rank_num
                     tmp_dict["changeTierState"] = change_tier_state
-                    tmp_dict["changeTierValue"] = change_tier_value
+                    tmp_dict["changeTierValue"] = int(change_tier_value)
                     tmp_dict["linePosition"] = line_position
                     tmp_dict["championName"] = champion_name
                     tmp_dict["goLine"] = go_line
                     tmp_dict["winningRate"] = winning_rate
-                    tmp_dict["pickRate"] = pick_rate
-                    tmp_dict["tier"] = tier
+                    tmp_dict["pickRate"] = float(pick_rate)
+                    tmp_dict["tier"] = int(tier)
 
                     # 결과 list에 저장
                     result_list.append(tmp_dict)
@@ -211,10 +211,10 @@ class OpggStatistics(Opgg):
 
                     tmp_dict = {}
 
-                    tmp_dict["rankNum"] = rank_num
+                    tmp_dict["rankNum"] = int(rank_num)
                     tmp_dict["lineFilter"] = line_filter
                     tmp_dict["championName"] = champion_name
-                    tmp_dict["banRate"] = ban_rate
+                    tmp_dict["banRate"] = float(ban_rate)
 
                     # 결과 list에 저장
                     result_list.append(tmp_dict)
