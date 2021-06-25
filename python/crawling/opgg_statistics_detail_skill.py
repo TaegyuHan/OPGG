@@ -8,8 +8,11 @@
 
 
 import re
+import os
 import sys
 from time import sleep
+
+sys.path.append(os.path.dirname(__file__))
 from opgg_statistics_detail import OpggStatisticsDetail
 
 
@@ -30,6 +33,8 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
 
         Args:
             champ_num ([int]): 챔피언 번호
+              ex ) : 266
+
             champ_line ([string]): 챔피언 가는 라인 대문자
               ex ) : "TOP", "JUNGLE", "MID", "ADC", "SUPPORT"
 
@@ -66,13 +71,17 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
 
                 # 스킬 해더 승률
                 winrate = \
-                  div[i].find("div", class_="champion-stats__filter_item_value--winrate"
-                  ).find("b").get_text().replace("%", "")
+                  float(
+                    div[i].find("div", class_="champion-stats__filter_item_value--winrate"
+                    ).find("b").get_text().replace("%", "")
+                  )
 
                 # 스킬 해더 픽률
                 pickrate = \
-                  div[i].find("div", class_="champion-stats__filter_item_value--pickrate"
-                  ).find("b").get_text().replace("%", "")
+                  float(
+                    div[i].find("div", class_="champion-stats__filter_item_value--pickrate"
+                    ).find("b").get_text().replace("%", "")
+                  )
 
                 # 스킬 해더 key 만들기
                 for j in range(len(li)):
@@ -121,18 +130,20 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
                     result_dict[skill_type]["SkillBuild"][i]["Sequence"] = []
 
                     # 스킬 픽률
-                    pickrate = tbody_pickrate[i].get_text().replace(" ", "").strip().split("%")
+                    pickrate = \
+                      tbody_pickrate[i].get_text().replace(" ", "").strip().split("%")
 
                     result_dict[skill_type]["SkillBuild"][i]["PickPercentage"] = \
-                      pickrate[0]
+                      float(pickrate[0])
+
                     result_dict[skill_type]["SkillBuild"][i]["PickCount"] = \
-                      pickrate[1]
+                      int(pickrate[1].replace(",", ""))
 
                     # 스킬 승률
-                    winrate = tbody_winrate[i].get_text().replace("%","")
-
                     result_dict[skill_type]["SkillBuild"][i]["WinRate"] = \
-                      winrate
+                      float(
+                        tbody_winrate[i].get_text().replace("%","")
+                      )
 
                     # 스킬 순서
                     for j in range(len(skill_list)):
