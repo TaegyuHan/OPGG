@@ -65,7 +65,7 @@ class PreprocessStatisticsDetailSkill():
 
 
 
-if __name__ == "__main__":
-    a = PreprocessStatisticsDetailSkill()
-    print(a.prepro_champion_detail_skill(266, "TOP"))
+# if __name__ == "__main__":
+#     a = PreprocessStatisticsDetailSkill()
+#     print(a.prepro_champion_detail_skill(266, "TOP"))
     
