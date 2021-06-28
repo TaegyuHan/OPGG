@@ -22,7 +22,7 @@ from log import log # 로그
 def insert_item_info(collection):
 
     logger = log.make_logger("MongoDB_DB")
-    logger.info("FUC | insert_item_info > run")
+    logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
     try:
 
@@ -48,7 +48,7 @@ def insert_item_info(collection):
         cursor.insert_one(json_data)
     
     except:
-        logger.error("FUC | insert_item_info > error")
+        logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 if __name__ == '__main__':
