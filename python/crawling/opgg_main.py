@@ -46,6 +46,7 @@ class Opgg():
 
         try:
             req = requests.get(url)
+            self.logger.info("HTTP | {} > conncet".format(url))
             html = req.text
             soup = BeautifulSoup(html, 'html.parser')
             self.soup_html = soup
