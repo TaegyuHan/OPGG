@@ -23,7 +23,7 @@ from log import log # 로그
 def insert_champion_info(collection):
 
     logger = log.make_logger("MongoDB_DB")
-    logger.info("FUC | insert_champion_info > run")
+    logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
     try:
         # json file 경로
@@ -57,7 +57,7 @@ def insert_champion_info(collection):
         cursor.insert_many(insert_list)
     
     except:
-        logger.error("FUC | insert_champion_info > error")
+        logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
 if __name__ == '__main__':
