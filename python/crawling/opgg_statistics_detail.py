@@ -16,7 +16,7 @@ class OpggStatisticsDetail(OpggStatistics):
 
 
     def __init__(self):
-        super().__init__() # 부모 생성자
+        OpggStatistics.__init__(self) # 부모 생성자
         self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
 
@@ -85,6 +85,7 @@ class OpggStatisticsDetail(OpggStatistics):
         """ 
             챔피언의 라인별로 URL을 생성 후
             list type으로 return 합니다.
+
         Returns:
             [list]: 아래와 같은 형식으로 리턴 합니다.
                 ['https://www.op.gg/champion/aatrox/statistics/top',
@@ -111,4 +112,6 @@ class OpggStatisticsDetail(OpggStatistics):
             self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
-    
+# if __name__ == '__main__':
+#     a = OpggStatisticsDetail()
+#     print(a.champion_line_url())
