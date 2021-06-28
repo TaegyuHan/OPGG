@@ -21,13 +21,13 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
 
 
     def __init__(self):
-        super().__init__() # 부모 생성자
+        OpggStatisticsDetail.__init__(self) # 부모 생성자
         self.logger.info("CLASS | {} > run".format(self.__class__.__name__))
 
 
 
 
-    def champion_detail_synthesize(self):
+    def champion_detail_synthesize(self, URL):
         """OPGG 챔피언 세부 종합 page 정보
 
         Returns:
@@ -41,11 +41,15 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
         self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
+        
             # 결과 딕셔너리
             result_dict = {}
 
             html = \
-              self.read_html("https://www.op.gg/champion/aatrox/statistics/top")
+              self.read_html(URL)
+
+            result_dict["Champion"] = URL.split("/")[-3]
+            result_dict["Champion_go_line"] = URL.split("/")[-1]
 
             tbody = html.find_all("tbody")
 
@@ -59,7 +63,7 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             result_dict["CounterChampion"] = {}
 
             for i in range(len(counter_champion)):
-              cc = counter_champion[i].get_text().strip() # 카운터 챔피언 
+              cc = counter_champion[i].get_text().replace(".", "").replace(" ", "").strip() # 카운터 챔피언 
               cw = counter_winrate[i].find("b").get_text().replace("%", "") # 카운터 챔피언  승률
               result_dict["CounterChampion"][cc] = float(cw)
 
@@ -256,8 +260,11 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
                 if n == 7: m = 0
                 if n == 8: m = 1
 
-                td = tbody[n].find_all("td", class_="champion-overview__data")
-                result_dict["Rune"][m]["RuneChoice"] = {}
+                try: # 룬 페이지가 하나인 상태 예외 처리
+                    td = tbody[n].find_all("td", class_="champion-overview__data")
+                    result_dict["Rune"][m]["RuneChoice"] = {}
+                except:
+                    continue
                 
                 for i in range(len(td)):
                     result_dict["Rune"][m]["RuneChoice"][i] = {}
@@ -311,5 +318,6 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
             self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
-
-    
+if __name__ == '__main__':
+    a = OpggStatisticsDetailSynthesize()
+    print(a.champion_detail_synthesize())
