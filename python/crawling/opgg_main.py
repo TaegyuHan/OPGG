@@ -5,6 +5,7 @@
 
 """
 
+from time import sleep
 from bs4 import BeautifulSoup
 import requests
 import sys
@@ -46,6 +47,7 @@ class Opgg():
 
         try:
             req = requests.get(url)
+            sleep(1)
             self.logger.info("HTTP | {} > conncet".format(url))
             html = req.text
             soup = BeautifulSoup(html, 'html.parser')
