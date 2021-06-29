@@ -1,8 +1,4 @@
 import sys
-import os
-
-sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))))
-from log import log # 로그
 
 
 def champ_num_line(url, cursor_find):
