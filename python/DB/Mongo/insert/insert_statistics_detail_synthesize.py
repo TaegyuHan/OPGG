@@ -23,12 +23,15 @@ from crawling.opgg_statistics_detail_synthesize \
   import OpggStatisticsDetailSynthesize # 전처리 class
 
 
-def insert_statistics_detail_synthesize(collection):
-    """ 크롤링한 데이터를 DB에 넣습니다.
+def insert_statistics_detail_synthesize(collection = "championDetailSynthesize"):
+    """크롤링한 데이터를 DB에 넣습니다.
 
         crawling_func :
-            champion_detail_synthesize()
+            champion_detail_synthesize()    
 
+    Args:
+        collection (str, optional): collection 이름
+        [description]. Defaults to "championDetailSynthesize".
     """
 
     logger = log.make_logger("MongoDB_DB")

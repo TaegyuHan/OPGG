@@ -30,6 +30,10 @@ class OpggStatisticsDetailSynthesize(OpggStatisticsDetail):
     def champion_detail_synthesize(self, URL):
         """OPGG 챔피언 세부 종합 page 정보
 
+        Args:
+            url ([string]): 검색 URL
+                ex ) : https://www.op.gg/champion/aatrox/statistics/top
+
         Returns:
             [json]: 세부 정보
             ex ) : {'CounterChampion': {'Heimerdinger': '46.04',

@@ -25,13 +25,17 @@ from crawling.opgg_statistics_detail_skill \
   import OpggStatisticsDetailSkill # 전처리 class
 
 
-def insert_statistics_detail_skill(collection):
-    """ 
-        크롤링한 데이터를 DB에 넣습니다.
+def insert_statistics_detail_skill(collection = "championDetailSkill"):
+    """크롤링한 데이터를 DB에 넣습니다.
 
         crawling_func :
-            champion_detail_skill()
+            champion_detail_skill()    
+
+    Args:
+        collection (str, optional): collection 이름
+        [description]. Defaults to "championDetailSkill".
     """
+
 
     logger = log.make_logger("MongoDB_DB")
     logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
@@ -46,8 +50,6 @@ def insert_statistics_detail_skill(collection):
 
     CRAWLING = OpggStatisticsDetailSkill() # 크롤링 연결
     url_list = CRAWLING.champion_line_url() # URL 가져오기
-
-    print(type(cursor_find))
 
     # 챔피언 URL을 가지고
     # 이름과 라인 추출
@@ -69,7 +71,7 @@ def insert_statistics_detail_skill(collection):
 
 
 
-if __name__ == '__main__':
+# if __name__ == '__main__':
 
-    collection = "championDetailSkill2"
-    insert_statistics_detail_skill(collection)
+#     collection = "championDetailSkill"
+#     insert_statistics_detail_skill(collection)
