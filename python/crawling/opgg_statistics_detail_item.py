@@ -28,24 +28,28 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
 
 
 
-    def champion_detail_item(self):
+    def champion_detail_item(self, url):
         """OPGG 챔피언 세부 아이템 page 정보
 
-        Returns:
-            [json]: 아이템
-            ex ) : {
-                      "CoreBuild": {
-                        "0": {
-                          "item": [
-                            6630,
-                            3053,
-                            6333
-                          ],
-                          "PickPercentage": 19.19,
-                          "PickCount": 176,
-                          "WinRate": 60.23
-                        },
-                        "1": {
+        Args:
+            url ([string]): 검색 URL
+                ex ) : https://www.op.gg/champion/aatrox/statistics/top
+                
+          Returns:
+              [json]: 아이템
+              ex ) : {
+                        "CoreBuild": {
+                          "0": {
+                            "item": [
+                              6630,
+                              3053,
+                              6333
+                            ],
+                            "PickPercentage": 19.19,
+                            "PickCount": 176,
+                            "WinRate": 60.23
+                          },
+                          "1": {
         """
 
         self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
@@ -54,8 +58,13 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
             # 결과 딕셔너리
             result_dict = {}
 
+            champ_name = url.split("/")[-3]
+            champ_line = url.split("/")[-1]
+
+            url += "/item"
+
             html = \
-              self.read_html("https://www.op.gg/champion/aatrox/statistics/top/item")
+              self.read_html(url)
 
             # 이미지 정규식
             pattern = "([-\w]+\.(?:jpg|gif|png|jpeg))"
@@ -149,6 +158,9 @@ class OpggStatisticsDetailItem(OpggStatisticsDetail):
                       float(
                         pick2
                       )
+
+            result_dict["champName"] = champ_name
+            result_dict["champLine"] = champ_line
 
             return result_dict
 
