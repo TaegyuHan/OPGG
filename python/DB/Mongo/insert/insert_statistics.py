@@ -3,7 +3,9 @@
 """
    DB : MongoDB
    Database : opgg
-   Collection : championInfochampionStatisticsInfo 
+   Collection : championInfochampionStatisticsInfo,
+                championStatisticsBanInfo
+                
    데이터 입력 code
 """
 
