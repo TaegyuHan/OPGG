@@ -29,8 +29,18 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
 
 
 
-    def champion_detail_rune(self, champ_num, champ_line):
+    def champion_detail_rune(self, url, champ_num, champ_line):
         """OPGG 챔피언 세부 룬 page 정보
+
+        Args:
+            url ([string]): 검색 URL
+                ex ) : https://www.op.gg/champion/aatrox/statistics/top
+                
+            champ_num ([int]): 챔피언 번호
+              ex ) : 266
+
+            champ_line ([string]): 챔피언 가는 라인 대문자
+              ex ) : "TOP", "JUNGLE", "MID", "ADC", "SUPPORT"
 
         Returns:
             [json]: 룬
@@ -50,8 +60,10 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
             # 이미지 정규식
             pattern = "([-\w]+\.(?:jpg|gif|png|jpeg))"
 
+            url += "/rune"
+
             html = \
-              self.read_html("https://www.op.gg/champion/aatrox/statistics/mid/rune")
+              self.read_html(url)
 
             div = html.find("div", class_="champion-box-content")
             
@@ -168,7 +180,10 @@ class OpggStatisticsDetailRune(OpggStatisticsDetail):
                     float(
                       td_winrate[i].get_text().replace("%", "")
                     )
-        
+                    
+            result_dict["champNum"] = champ_num
+            result_dict["champLine"] = champ_line
+
             return result_dict
     
         except:
