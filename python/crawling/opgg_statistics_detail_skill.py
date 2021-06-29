@@ -28,10 +28,13 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
 
 
 
-    def champion_detail_skill(self, champ_num, champ_line):
+    def champion_detail_skill(self, url, champ_num, champ_line):
         """OPGG 챔피언 세부 스킬 page 정보
 
         Args:
+            url ([string]): 검색 URL
+                ex ) : https://www.op.gg/champion/aatrox/statistics/top
+                
             champ_num ([int]): 챔피언 번호
               ex ) : 266
 
@@ -48,11 +51,14 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
         self.logger.info("FUC | {} > run".format(sys._getframe().f_code.co_name))
 
         try:
+
             # 결과 딕셔너리
             result_dict = {}
 
+            url += "/skill"
+
             html = \
-              self.read_html("https://www.op.gg/champion/aatrox/statistics/top/skill")
+              self.read_html(url)
             
             # 이미지 정규식
             pattern = "([-\w]+\.(?:jpg|gif|png|jpeg))"
@@ -84,14 +90,16 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
                   )
 
                 # 스킬 해더 key 만들기
+                # print(li)
                 for j in range(len(li)):
-                    img_src = li[j].find("img")["src"]
-                    skill_image = re.search(pattern, img_src).group()
-                    num = skill_image.find(".") - 1 # 스킬 추출 번호
-                    il.append(skill_image[num])
+                    img_src = li[j].find("span").get_text()
+                    img_src
+                    il.append(img_src)
                 
                 skill_type = ''.join(il)
                 skill_type = skill_type.replace("Q", "0").replace("W", "1").replace("E", "2")
+
+                # print(skill_type)
 
                 # 입력
                 result_dict[skill_type] = {}
@@ -102,11 +110,10 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
             for skill_type in result_dict.keys():
                 url_format_num = ",".join(skill_type)
 
-                self.SKILL_AJAX_URL = "https://www.op.gg/champion/ajax/statistics/skillList/championId={}&position={}&skillPriority={}&"
-                
+                self.SKILL_AJAX_URL = "https://www.op.gg/champion/ajax/statistics/skillList/championId={}&position={}&skillPriority={}&"                
                 URL = self.SKILL_AJAX_URL.format(champ_num, # 챔피언 번호
-                                                 champ_line, # 라인 "MID"
-                                                 url_format_num )
+                                                  champ_line, # 라인 "MID"
+                                                  url_format_num )
 
                 # print(URL)
                 html = self.read_html(URL)
@@ -150,10 +157,18 @@ class OpggStatisticsDetailSkill(OpggStatisticsDetail):
                         skill = skill_list[j].get_text().strip()
                         result_dict[skill_type]["SkillBuild"][i]["Sequence"].append(skill)
 
+
+            result_dict["champNum"] = champ_num
+            result_dict["champLine"] = champ_line
+
             return result_dict
 
         except:
             self.logger.error("FUC | {} > error".format(sys._getframe().f_code.co_name))
 
 
-
+# if __name__ == '__main__':
+#     a = OpggStatisticsDetailSkill()
+#     print(
+#       a.champion_detail_skill()
+#     )
