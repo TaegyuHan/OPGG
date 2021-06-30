@@ -1,0 +1,245 @@
+
+/* 전체 화면 적용 */
+body {
+  background-color: #2B2B2B;
+  min-width: 1080px;
+  width: 100%;
+}
+
+
+/* 헤더 */
+header {
+  width: 100%;
+  height: 75px;
+  background-color: #325A8D;
+}
+
+.header_text_box {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+header div span {
+  display: block;
+  padding: 20px;
+  font-family: SegoeUI;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+
+/* 메인 배경화면 */
+.background_img_box {
+  display: flex;
+  justify-content: center;
+  margin: 25px 0 0 0;
+  width: 100%;
+  height: 300px;
+}
+
+.background_img_box .position_box{
+  min-width: 1050px;
+  width: 55%;
+  height: 300px;
+  overflow: hidden;
+}
+
+.background_img_box>.position_box>img {
+  position: relative;
+  min-width: 1050px;
+  width: 100%;
+  top: -175px;
+}
+
+
+
+/* 데이터 출처 정보 */
+.data_info_box .position_box {
+  margin: auto;
+  min-width: 1080px;
+  width: 60%;
+  height: 45px;
+  overflow: hidden;
+}
+
+.position_box div {
+  margin: 13px 0 0 0;
+}
+
+.position_box div span{
+  font-size: 13px;
+  opacity: 0.4;
+}
+
+.position_box>div:nth-child(1) {
+  float: left;
+}
+
+.position_box>div:nth-child(2) {
+  float: right;
+}
+
+
+
+
+/* 챔피언 정보 메인 페이지 */
+.champion_main {
+  margin: auto;
+  min-width: 1080px;
+  width: 60%;
+  height: 3500px;
+  background-color: green;
+}
+
+
+/* 챔피언 정보 */
+.champion_icon {
+  float: left;
+  width: 60%;
+  height: 3500px;
+  background-color: bisque;
+}
+
+/* 챔피언 필터 */
+.champion_icon_filter {
+  box-sizing: border-box;
+  width: 100%;
+  height: 60px;
+  border-style:solid;
+  border-width: 2px;
+  border-color: #808080;
+  background-color: #325A8D;
+}
+
+.champion_icon_filter_list {
+  float: left;
+}
+
+.champion_icon_filter_list li {
+  float: left;
+  font-size: 15px;
+}
+
+.champion_icon_filter_list a {
+  background-color: #325A8D;
+  display: block;
+  padding: 18px 14px;
+  line-height: 17px;
+  font-size: 14px;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+}
+
+#champion_filter {
+  width: 195px;
+  height: 30px;
+  font-size:15px;
+}
+
+.text_filter {
+  float: right;
+  margin: 7px;
+  border: 2px solid #808080;
+}
+
+
+
+/* 챔피언 리스트 */
+.champion_list {
+  width: 100%;
+  height:auto;
+  overflow:hidden;
+  background-color: tan;
+}
+
+/* 챔피언 박스 중앙 정렬 */
+.box_center {
+  margin: 0 5% 0 5%;
+  width: 90%;
+}
+
+
+/* 챔피언 아이콘 박스 */
+.champion_icon_box {
+  position :relative;
+  float: left;
+  margin: 4px;
+}
+
+.champion_icon_box a {
+  text-decoration: none;
+}
+
+.champion_img_box img {
+  width: 75px;
+  height: 75px;
+}
+
+.champion_position_box {
+  width: 75px;
+  height: 75px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.champion_position_text {
+  text-align: right;
+
+}
+
+.champion_position_box span{
+  text-align: right;
+  background-color: #2B2B2B;
+  color: #FFFFFF;
+  font-size: 10px;
+}
+
+.champion_name span {
+  margin-top: 2px;
+  display: block;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-family: SegoeUI;
+}
+
+
+
+
+
+
+
+/* 챔피언 티어 퍼블리싱 해야함 */
+
+.champion_rank {
+  float: left;
+  width: 40%;
+  height: 3500px;
+  background-color: green;
+}
+
+.champion_rank_filter {
+  box-sizing: border-box;
+  width: 100%;
+  height: 60px;
+  border-style:solid;
+  border-width: 2px;
+  border-color: #808080;
+  background-color: #325A8D;
+  }
+}
+
+
+
+
+
+
+
+
+/* main {
+  width: 100%;
+  height: 300px;
+  background-color: green;
+} */4
