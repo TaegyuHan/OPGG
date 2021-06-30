@@ -12,9 +12,6 @@ import sys
 import os
 import json
 
-# 챔피언 이름 라인 함수 호출
-from insert_statistics_detail import champ_num_line
-
 sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))
 from mongo_config import MongoDB_DB # DB class
 
