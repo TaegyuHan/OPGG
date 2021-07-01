@@ -154,3 +154,21 @@ cython_debug/
 /python/Pipfile.lock
 
 /public/img
+
+
+## PHP Laravel
+/php/blog/node_modules
+/php/blog/public/hot
+/php/blog/public/storage
+/php/blog/storage/*.key
+/php/blog/vendor
+/php/blog/.env
+/php/blog/.env.backup
+/php/blog/.phpunit.result.cache
+/php/blog/docker-compose.override.yml
+/php/blog/Homestead.json
+/php/blog/Homestead.yaml
+/php/blog/npm-debug.log
+/php/blog/yarn-error.log
+/php/blog/.idea
+/php/blog/.vscode
