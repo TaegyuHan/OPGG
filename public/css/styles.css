@@ -23,6 +23,7 @@ header {
 header div span {
   display: block;
   padding: 20px;
+  color: #FFFFFF;
   font-family: SegoeUI;
   font-weight: bold;
   font-size: 30px;
@@ -89,26 +90,28 @@ header div span {
   min-width: 1080px;
   width: 60%;
   height: 3500px;
-  background-color: green;
+  background-color: #112337;
 }
 
 
 /* 챔피언 정보 */
 .champion_icon {
+  box-sizing: border-box;
   float: left;
   width: 60%;
   height: 3500px;
-  background-color: bisque;
+  border:2px solid #808080;
+  background-color: #112337;
 }
 
 /* 챔피언 필터 */
-.champion_icon_filter {
+.champion_icon_filter, 
+.champion_rank_filter {
   box-sizing: border-box;
+  margin-bottom: 20px;
   width: 100%;
   height: 60px;
-  border-style:solid;
-  border-width: 2px;
-  border-color: #808080;
+  border:2px solid #808080;
   background-color: #325A8D;
 }
 
@@ -116,24 +119,28 @@ header div span {
   float: left;
 }
 
-.champion_icon_filter_list li {
+.champion_icon_filter_list li,
+.champion_rank_filter_list li {
   float: left;
   font-size: 15px;
 }
 
-.champion_icon_filter_list a {
+.champion_icon_filter_list a,
+.champion_rank_filter_list a {
   background-color: #325A8D;
   display: block;
-  padding: 18px 14px;
+  padding: 18.5px 14px;
   line-height: 17px;
   font-size: 14px;
+  font-family: SegoeUI;
+  font-weight: bold;
   color: #FFFFFF;
   text-decoration: none;
   border-bottom: 2px solid transparent;
 }
 
 #champion_filter {
-  width: 195px;
+  width: 190px;
   height: 30px;
   font-size:15px;
 }
@@ -151,19 +158,18 @@ header div span {
   width: 100%;
   height:auto;
   overflow:hidden;
-  background-color: tan;
 }
 
 /* 챔피언 박스 중앙 정렬 */
 .box_center {
-  margin: 0 5% 0 5%;
-  width: 90%;
+  margin: 0 auto;
+  width: 581px;
+  min-width: 581px;;
 }
-
 
 /* 챔피언 아이콘 박스 */
 .champion_icon_box {
-  position :relative;
+  position: relative;
   float: left;
   margin: 4px;
 }
@@ -187,7 +193,6 @@ header div span {
 
 .champion_position_text {
   text-align: right;
-
 }
 
 .champion_position_box span{
@@ -203,43 +208,186 @@ header div span {
   color: #FFFFFF;
   font-size: 12px;
   font-family: SegoeUI;
+  font-weight: bold;
 }
 
 
-
-
-
-
-
-/* 챔피언 티어 퍼블리싱 해야함 */
-
+/* 챔피언 랭크 */
 .champion_rank {
   float: left;
   width: 40%;
   height: 3500px;
-  background-color: green;
+} 
+
+/* 챔피언 정보 박스 */
+
+/* 티어 */
+.rank_info_box {
+  width: 95%;
+  margin: 0 auto;
+  overflow: hidden;
 }
 
+.rank_inner_filter_box {
+  background-color: red;
+  width: 100%;
+}
+
+/* 챔피언 랭크 필터 */
 .champion_rank_filter {
-  box-sizing: border-box;
   width: 100%;
-  height: 60px;
-  border-style:solid;
-  border-width: 2px;
+  height: 62px;
+}
+
+.rank_text {
+  display: inline-block;
+  padding: 17px 16px 0 16px;
+  height: 50px;
+  width: 30%;
+  min-width: 130px;
+}
+
+.rank_text span {
+  font-size: 20px;
+  font-family: SegoeUI;
+  font-weight: bold;
+}
+
+.champion_rank_filter_list {
+  float: right;
+}
+
+.filter_box {
+  width: 60%;
+  height: 50px;
+  float: right;
+}
+
+.rank_inner_filter_box {
+  width: 100%;
+}
+
+.rank_inner_filter_list li {
+  box-sizing: border-box;
+  float: left;
+  border: solid;
+  border-width: 1px;
   border-color: #808080;
+  font-size: 15px;
+  width: 20%;
   background-color: #325A8D;
-  }
+}
+
+.rank_inner_filter_list a {
+  display: block;
+  line-height: 17px;
+  font-size: 14px;
+  padding: 10px 10px;
+  font-family: SegoeUI;
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+}
+
+.rank_inner_info_text {
+  height: 80px;
+  width: 100%;
 }
 
 
-
-
-
-
-
-
-/* main {
+/* 챔피언 랭크 정보 테이블 */
+.rank_inner_info_table {
   width: 100%;
-  height: 300px;
-  background-color: green;
-} */4
+}
+
+/* 컬럼 이름 */
+.rank_inner_table_header {
+    padding: 12px;
+    font-size: 12px;
+    text-align: center;
+    font-weight: normal;
+    color: #777;
+}
+
+tr {
+  border: 1px solid #808080;
+}
+
+/* 챔피언 랭크 */
+.rank_inner_info__cell--rank {
+  padding-top: 15px;
+  vertical-align: top;
+  text-align: center;
+  font-size: 13px;
+}
+
+.rank_inner_info__cell--change_rank {
+  padding-top: 15px;
+  vertical-align: top;
+  text-align: center;
+}
+
+.rank_inner_info__cell--change_rank img {
+  width: 10px;
+}
+
+/* 챔피언 이미지 */
+.rank_inner_info__cell--champion {
+  vertical-align: top;
+}
+
+.rank_inner_info__cell--champion img {
+  margin: 4px;
+  width: 35px;
+  height: 35px;
+}
+
+/* 챔피언 이름 */
+.rank_inner_info__cell--champion_name {
+  padding-top: 3px;
+}
+
+.rank_inner_info__cell--champion_name>.champname_info,
+.rank_inner_info__cell--champion_name>.champname_info a {
+  width: 100%;
+  color: #FFFFFF;
+  font-size: 11px;
+  text-decoration: none;
+}
+
+.champname_info .text {
+  margin: 3px;
+}
+
+.rank_inner_info__cell--winrate {
+  padding-top: 17px;
+  vertical-align: top;
+  text-align: center;
+  font-size: 11px;
+}
+.rank_inner_info__cell--pickrate {
+  padding-top: 17px;
+  vertical-align: top;
+  text-align: center;
+  font-size: 11px;
+}
+.rank_inner_info__cell--tier {
+  padding-top: 17px;
+  vertical-align: top;
+  text-align: center;
+  font-size: 11px;
+}
+
+
+/* .rank_inner_filter_box>.champion_rank_filter_list li {
+  width: 100%;
+  position: relative;
+} */
+
+
+
+
+
+
+
